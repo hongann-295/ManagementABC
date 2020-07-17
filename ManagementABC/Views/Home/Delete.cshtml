@@ -1,0 +1,54 @@
+﻿@model DeleteViewModel
+@{
+    ViewBag.Title = "Delete Student ";
+}
+
+<h4>Delete student &gt; @ViewBag.Title</h4>
+
+<div class="row form-group">
+    <div class="col-sm-2">
+        <label asp-for="Id"></label>
+    </div>
+    <div class="col-sm-10">
+        <input asp-for="Fullname" class="form-control" readonly/>
+        <span asp-validation-for="Fullname" class="text-danger"></span>
+    </div>
+</div>
+<div class="row form-group">
+    <div class="col-sm-12">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteStudentModel">
+            Delete
+        </button>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-warning">Back</a>
+    </div>
+</div>
+
+<!-- Button to Open the Modal -->
+<!-- The Modal -->
+<div class="modal" id="deleteStudentModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-controller="Home" asp-action="Delete"  method="post">
+                <input hidden asp-for="Id" />
+                <input hidden asp-for="Fullname" />
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirm delete student</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Are you sure want to remove this student?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <a asp-controller="Home" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-warning">Yes</a>
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">No</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
